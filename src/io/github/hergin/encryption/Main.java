@@ -8,6 +8,8 @@ public class Main {
 		
 		int j=0;
 		
+		double x=0;
+		
 	}
 
 }
