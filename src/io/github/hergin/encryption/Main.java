@@ -8,6 +8,8 @@ public class Main {
 		
 		int j=0;
 		
+		int y=0;
+		
 	}
 
 }
