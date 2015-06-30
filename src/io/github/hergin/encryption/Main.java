@@ -9,6 +9,7 @@ public class Main {
 		int j=0;
 		
 		int y=0;
+		double x=0;
 		
 	}
 
