@@ -5,7 +5,6 @@ import java.math.BigInteger;
 public class PrimePair {
 
 	BigInteger q;
-
 	BigInteger p;
 
 	public PrimePair(BigInteger p, BigInteger q) {
@@ -19,6 +18,14 @@ public class PrimePair {
 		sb.append("P= " + p.toString() + "\n");
 		sb.append("Q= " + q.toString());
 		return sb.toString();
+	}
+
+	public BigInteger getQ() {
+		return q;
+	}
+
+	public BigInteger getP() {
+		return p;
 	}
 
 }
