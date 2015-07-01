@@ -1,13 +1,15 @@
 package io.github.hergin.encryption;
 
+import java.math.BigInteger;
+
 public class PrimePair {
 
-	long q;
+	BigInteger q;
 
-	long p;
+	BigInteger p;
 
-	public PrimePair(long p, long q) {
-		this.q = q;
+	public PrimePair(BigInteger p, BigInteger q) {
+		this.q = p;
 		this.p = p;
 	}
 
