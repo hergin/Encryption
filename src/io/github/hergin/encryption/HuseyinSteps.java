@@ -32,7 +32,7 @@ public class HuseyinSteps {
 	 * Pick a secret key k such that gcd(k,d) = 1.
 	 * 
 	 * @param d
-	 * @return k
+	 * @return k secretkey
 	 */
 	public BigInteger step5(BigInteger d) {
 		BigInteger k = Utils.getProbablePrime(Constants.BIT_LENGTH);
