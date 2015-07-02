@@ -3,6 +3,12 @@ package io.github.hergin.encryption;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * Encryption steps
+ * 
+ * @author hergin
+ *
+ */
 public class EncryptionSteps {
 
 	/**
