@@ -29,8 +29,8 @@ public class Scheme1KeygenSteps {
 	/**
 	 * (2) Compute fi = pi * qi, for 1 <= i <= r.
 	 * 
-	 * @param List
-	 *            <PrimePair> listOfPairs
+	 * @param pq
+	 *            pairs
 	 * @return fi
 	 */
 	public static List<BigInteger> step2(List<PrimePair> listOfPairs) {
@@ -59,16 +59,15 @@ public class Scheme1KeygenSteps {
 	 * should look for an optimized solution other than a brute force, lets talk
 	 * after timing
 	 * 
-	 * @param BigInteger
-	 *            n
-	 * @return BigInteger
+	 * @param N1
+	 * @return EulerPhi(N1)
 	 */
-	public static BigInteger step4(BigInteger num) {
+	public static BigInteger step4(BigInteger N1) {
 		BigInteger count = BigInteger.ZERO;
 		BigInteger a;
-		for (a = new BigInteger("1"); a.compareTo(num) < 0; a = a
+		for (a = new BigInteger("1"); a.compareTo(N1) < 0; a = a
 				.add(BigInteger.ONE)) {
-			if (num.gcd(a).equals(BigInteger.ONE)) { // coprime
+			if (N1.gcd(a).equals(BigInteger.ONE)) { // coprime
 				count.add(BigInteger.ONE);
 			}
 		}
@@ -94,9 +93,9 @@ public class Scheme1KeygenSteps {
 	/**
 	 * (6) Compute N =k^2 p1q1 p2q2 ... pr qr
 	 * 
-	 * @param BigInteger
-	 *            k, ArrayList<BigInteger> fi
-	 * @return N BigInteger
+	 * @param k
+	 *            , fi
+	 * @return N
 	 */
 	public static BigInteger step6(BigInteger k, List<BigInteger> fi) {
 		BigInteger N = k.multiply(k);
