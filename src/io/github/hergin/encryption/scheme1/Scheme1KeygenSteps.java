@@ -55,22 +55,24 @@ public class Scheme1KeygenSteps {
 
 	/**
 	 * (4) Compute d = EulerPhi(N1) function.
-	 * http://professorjava.weebly.com/totient.html works correctly.
+	 * http://professorjava.weebly.com/totient.html works correctly. TODO we
+	 * should look for an optimized solution other than a brute force, lets talk
+	 * after timing
 	 * 
 	 * @param BigInteger
 	 *            n
 	 * @return BigInteger
 	 */
 	public static BigInteger step4(BigInteger num) {
-		int count = 0;
+		BigInteger count = BigInteger.ZERO;
 		BigInteger a;
 		for (a = new BigInteger("1"); a.compareTo(num) < 0; a = a
 				.add(BigInteger.ONE)) {
 			if (num.gcd(a).equals(BigInteger.ONE)) { // coprime
-				count++;
+				count.add(BigInteger.ONE);
 			}
 		}
-		return (new BigInteger("" + count));
+		return count;
 	}
 
 	/**
