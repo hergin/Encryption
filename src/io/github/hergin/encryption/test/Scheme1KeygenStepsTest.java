@@ -72,18 +72,12 @@ public class Scheme1KeygenStepsTest {
 				new BigInteger("4000"));
 	}
 	
-	/**
-	 * This lasts at least 3 secs
-	 */
 	@Test
 	public void testStep4_4() {
 		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("12421232")),
 				new BigInteger("6210608"));
 	}
-	
-	/**
-	 * This lasts way longer 38 seconds
-	 */
+
 	@Test
 	public void testStep4_5() {
 		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("124212321")),
