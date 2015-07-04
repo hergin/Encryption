@@ -27,5 +27,6 @@ public class PrimePair {
 	public BigInteger getP() {
 		return p;
 	}
+	
 
 }

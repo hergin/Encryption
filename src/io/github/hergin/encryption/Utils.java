@@ -71,5 +71,19 @@ public class Utils {
 
 		return result;
 	}
+	
+	public static BigInteger GCD(BigInteger a, BigInteger b){ 
+	    BigInteger temp;
+	    if(a.compareTo(b) == -1){
+	    	
+	      temp=a;
+	      a=b;
+	      b=temp;
+	    }
+	    if(a.mod(b).equals(BigInteger.ZERO)){
+	      return(b);
+	    }
+	    return(GCD(a.mod(b),b));
+	  }
 
 }

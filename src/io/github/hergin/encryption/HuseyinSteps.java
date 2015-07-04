@@ -22,7 +22,7 @@ public class HuseyinSteps {
 	 * @param fi
 	 * @return N1
 	 */
-	public BigInteger step3(List<BigInteger> fi) {
+	public static BigInteger step3(List<BigInteger> fi) {
 		BigInteger N1 = BigInteger.ONE;
 		N1 = Utils.lcm(fi);
 		return N1;
