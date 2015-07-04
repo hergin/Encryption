@@ -1,4 +1,4 @@
-package io.github.hergin.encryption;
+package io.github.hergin.encryption.utils;
 
 import java.math.BigInteger;
 
@@ -27,6 +27,9 @@ public class PrimePair {
 	public BigInteger getP() {
 		return p;
 	}
-	
+
+	public BigInteger multiply() {
+		return p.multiply(q);
+	}
 
 }

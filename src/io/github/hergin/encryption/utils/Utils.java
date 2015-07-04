@@ -1,4 +1,4 @@
-package io.github.hergin.encryption;
+package io.github.hergin.encryption.utils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -7,10 +7,32 @@ import java.util.Random;
 
 /**
  * Utils class
- * 
- * @author hergin
  */
 public class Utils {
+
+	/**
+	 * Execute function f, Constants.RUN_COUNT times and measure average
+	 * performance in milliseconds
+	 * 
+	 * @param f
+	 *            function to be executed
+	 * @return average running time in milliseconds
+	 */
+	public static double measure(Function f) {
+
+		Timer timer = new Timer();
+
+		long totalTime = 0;
+		for (int i = 0; i < Constants.RUN_COUNT; i++) {
+			timer.start();
+			f.doIt();
+			timer.end();
+			totalTime += timer.getTotalTime();
+		}
+
+		return totalTime / (Constants.RUN_COUNT * 1.0);
+
+	}
 
 	/**
 	 * Compute LCM of a and b by LCM(a,b)=a*(b/gcd(a,b))
@@ -71,19 +93,5 @@ public class Utils {
 
 		return result;
 	}
-	
-	public static BigInteger GCD(BigInteger a, BigInteger b){ 
-	    BigInteger temp;
-	    if(a.compareTo(b) == -1){
-	    	
-	      temp=a;
-	      a=b;
-	      b=temp;
-	    }
-	    if(a.mod(b).equals(BigInteger.ZERO)){
-	      return(b);
-	    }
-	    return(GCD(a.mod(b),b));
-	  }
 
 }

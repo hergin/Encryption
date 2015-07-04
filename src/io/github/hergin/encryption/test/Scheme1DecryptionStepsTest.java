@@ -1,28 +1,20 @@
 package io.github.hergin.encryption.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import io.github.hergin.encryption.scheme1.Scheme1DecryptionSteps;
 
 import java.math.BigInteger;
 
-import io.github.hergin.encryption.DecryptionSteps;
-
-import org.junit.Before;
 import org.junit.Test;
 
-public class DecryptionStepsTest {
-
-	DecryptionSteps dec = new DecryptionSteps();
-
-	@Before
-	public void setUp() throws Exception {
-	}
+public class Scheme1DecryptionStepsTest {
 
 	@Test
 	public void testStep1() {
 		BigInteger k = new BigInteger("5");
 		BigInteger d = new BigInteger("48");
 
-		assertEquals("29", dec.step1(k, d).toString());
+		assertEquals(new BigInteger("29"), Scheme1DecryptionSteps.step1(k, d));
 	}
 
 	@Test
@@ -31,7 +23,8 @@ public class DecryptionStepsTest {
 		BigInteger l = new BigInteger("29");
 		BigInteger N1 = new BigInteger("210");
 
-		assertEquals("20", dec.step2(C, l, N1).toString());
+		assertEquals(new BigInteger("20"),
+				Scheme1DecryptionSteps.step2(C, l, N1));
 	}
 
 }

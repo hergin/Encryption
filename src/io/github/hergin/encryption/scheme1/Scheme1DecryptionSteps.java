@@ -1,8 +1,13 @@
-package io.github.hergin.encryption;
+package io.github.hergin.encryption.scheme1;
 
 import java.math.BigInteger;
 
-public class DecryptionSteps {
+/**
+ * 
+ * Static decryption steps of Scheme 1
+ * 
+ */
+public class Scheme1DecryptionSteps {
 
 	/**
 	 * Compute inverse l of k according to mod d.
@@ -12,7 +17,7 @@ public class DecryptionSteps {
 	 * @param d
 	 * @return l
 	 */
-	public BigInteger step1(BigInteger k, BigInteger d) {
+	public static BigInteger step1(BigInteger k, BigInteger d) {
 		BigInteger l = BigInteger.ONE;
 
 		l = k.modInverse(d);
@@ -29,7 +34,7 @@ public class DecryptionSteps {
 	 * @param N1
 	 * @return M plaintext
 	 */
-	public BigInteger step2(BigInteger C, BigInteger l, BigInteger N1) {
+	public static BigInteger step2(BigInteger C, BigInteger l, BigInteger N1) {
 		BigInteger M = BigInteger.ONE;
 
 		M = C.modPow(l, N1);

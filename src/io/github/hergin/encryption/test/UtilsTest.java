@@ -1,7 +1,7 @@
 package io.github.hergin.encryption.test;
 
-import static org.junit.Assert.*;
-import io.github.hergin.encryption.Utils;
+import static org.junit.Assert.assertEquals;
+import io.github.hergin.encryption.utils.Utils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
