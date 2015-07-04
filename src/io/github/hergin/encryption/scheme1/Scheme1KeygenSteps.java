@@ -55,9 +55,9 @@ public class Scheme1KeygenSteps {
 
 	/**
 	 * (4) Compute d = EulerPhi(N1) function.
-	 * http://professorjava.weebly.com/totient.html works correctly. TODO we
-	 * should look for an optimized solution other than a brute force, lets talk
-	 * after timing
+	 * http://professorjava.weebly.com/totient.html works correctly. _______
+	 * TODO definitely we should look for an optimized solution other than a
+	 * brute force, check @Scheme1KeygenStepsTest unit tests for timing
 	 * 
 	 * @param N1
 	 * @return EulerPhi(N1)
@@ -68,7 +68,7 @@ public class Scheme1KeygenSteps {
 		for (a = new BigInteger("1"); a.compareTo(N1) < 0; a = a
 				.add(BigInteger.ONE)) {
 			if (N1.gcd(a).equals(BigInteger.ONE)) { // coprime
-				count.add(BigInteger.ONE);
+				count = count.add(BigInteger.ONE);
 			}
 		}
 		return count;

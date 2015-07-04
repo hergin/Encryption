@@ -59,6 +59,36 @@ public class Scheme1KeygenStepsTest {
 		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("210")),
 				new BigInteger("48"));
 	}
+	
+	@Test
+	public void testStep4_2() {
+		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("500")),
+				new BigInteger("200"));
+	}
+	
+	@Test
+	public void testStep4_3() {
+		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("10000")),
+				new BigInteger("4000"));
+	}
+	
+	/**
+	 * This lasts at least 3 secs
+	 */
+	@Test
+	public void testStep4_4() {
+		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("12421232")),
+				new BigInteger("6210608"));
+	}
+	
+	/**
+	 * This lasts way longer 38 seconds
+	 */
+	@Test
+	public void testStep4_5() {
+		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("124212321")),
+				new BigInteger("82750464"));
+	}
 
 	@Test
 	public void testStep5() {
