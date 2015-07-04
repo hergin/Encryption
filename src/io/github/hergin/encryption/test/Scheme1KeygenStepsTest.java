@@ -53,6 +53,22 @@ public class Scheme1KeygenStepsTest {
 		fi.add(new BigInteger("35"));
 		assertEquals(new BigInteger("210"), Scheme1KeygenSteps.step3(fi));
 	}
+	
+	@Test
+	public void testStep3_2() {
+		List<BigInteger> fi = new ArrayList<>();
+		fi.add(new BigInteger("713"));
+		fi.add(new BigInteger("323"));
+		fi.add(new BigInteger("713"));
+		fi.add(new BigInteger("391"));
+		fi.add(new BigInteger("551"));
+		fi.add(new BigInteger("713"));
+		fi.add(new BigInteger("437"));
+		fi.add(new BigInteger("667"));
+		fi.add(new BigInteger("713"));
+		fi.add(new BigInteger("899"));
+		assertEquals(new BigInteger("6678671"), Scheme1KeygenSteps.step3(fi));
+	}
 
 	@Test
 	public void testStep4() {
