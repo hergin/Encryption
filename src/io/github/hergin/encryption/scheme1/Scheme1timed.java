@@ -54,7 +54,6 @@ public class Scheme1timed {
 		System.out
 				.print(Utils.measure(() -> setN1(Scheme1KeygenSteps.step3(fi)))
 						+ ",");
-
 		/**
 		 * STEP4: Compute d
 		 */
