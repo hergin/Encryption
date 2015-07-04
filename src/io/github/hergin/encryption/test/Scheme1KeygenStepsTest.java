@@ -83,6 +83,12 @@ public class Scheme1KeygenStepsTest {
 		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("124212321")),
 				new BigInteger("82750464"));
 	}
+	
+	@Test
+	public void testStep4_6() {
+		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("394516319693")),
+				new BigInteger("367250526720"));
+	}
 
 	@Test
 	public void testStep5() {
