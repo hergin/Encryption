@@ -1,7 +1,8 @@
 package io.github.hergin.encryption.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import io.github.hergin.encryption.scheme1.Scheme1EncryptionSteps;
+import io.github.hergin.encryption.utils.PlainTextOutOfScopeException;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ public class Scheme1EncryptionStepsTest {
 
 		assertEquals(new BigInteger("210"), Scheme1EncryptionSteps.step2(fi));
 
+	}
+
+	@Test
+	public void testStep3() {
+		assertFalse(Scheme1EncryptionSteps.step3(new BigInteger("100"),
+				new BigInteger("90")));
 	}
 
 	@Test

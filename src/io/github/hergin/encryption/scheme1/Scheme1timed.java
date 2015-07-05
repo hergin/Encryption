@@ -8,7 +8,6 @@ import io.github.hergin.encryption.utils.Utils;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Scheme1timed {
@@ -50,7 +49,7 @@ public class Scheme1timed {
 		System.out.print(Utils.measure(() -> fi.addAll(Scheme1KeygenSteps
 				.step2(piqi))) + ",");
 
-		//System.out.print("(fi=" + Arrays.toString(fi.toArray()) + ")");
+		// System.out.print("(fi=" + Arrays.toString(fi.toArray()) + ")");
 
 		/**
 		 * STEP3: Compute N1
@@ -58,8 +57,6 @@ public class Scheme1timed {
 		System.out
 				.print(Utils.measure(() -> setN1(Scheme1KeygenSteps.step3(fi)))
 						+ ",");
-
-		System.out.print("(N1=" + N1 + ")");
 
 		/**
 		 * STEP4: Compute d
@@ -79,6 +76,10 @@ public class Scheme1timed {
 		 */
 		System.out.print(Utils.measure(() -> setN(Scheme1KeygenSteps.step6(
 				kfiPair.getK(), fi))));
+
+		System.out.print("," + N1+",");
+		
+		System.out.print(Arrays.toString(piqi.toArray()));
 
 		/**
 		 * STEP7: Finalize keys (public is already finalized)

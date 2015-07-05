@@ -25,6 +25,7 @@ public class Scheme1 {
 
 	public Scheme1(int r) {
 		this.r = r;
+		kfiPair = new SecretKey();
 	}
 
 	public Scheme1 keygen() {
@@ -118,6 +119,10 @@ public class Scheme1 {
 
 	public SecretKey getSecretKey() {
 		return kfiPair;
+	}
+
+	public BigInteger getN1() {
+		return N1;
 	}
 
 }

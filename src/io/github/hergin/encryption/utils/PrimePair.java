@@ -15,8 +15,8 @@ public class PrimePair {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("P= " + p.toString() + "\n");
-		sb.append("Q= " + q.toString());
+		sb.append("<" + p.toString() + ",");
+		sb.append(q.toString() + ">");
 		return sb.toString();
 	}
 
