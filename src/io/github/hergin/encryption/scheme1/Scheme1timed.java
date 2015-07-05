@@ -1,13 +1,12 @@
 package io.github.hergin.encryption.scheme1;
 
 import io.github.hergin.encryption.utils.PlainTextOutOfScopeException;
-import io.github.hergin.encryption.utils.PrimePair;
+import io.github.hergin.encryption.utils.PrimePairList;
 import io.github.hergin.encryption.utils.SecretKey;
 import io.github.hergin.encryption.utils.Utils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Scheme1timed {
@@ -36,10 +35,13 @@ public class Scheme1timed {
 		/**
 		 * STEP1: Compute <pi,qi> pairs
 		 */
-		List<PrimePair> piqi = new ArrayList<PrimePair>();
+		PrimePairList pqlist = new PrimePairList();
 
-		System.out.print(Utils.measure(() -> piqi.addAll(Scheme1KeygenSteps
-				.step1(r))) + ",");
+		System.out.print(Utils.measure(() -> {
+			PrimePairList temp = Scheme1KeygenSteps.step1(r);
+			pqlist.getList().addAll(temp.getList());
+			pqlist.getSet().addAll(temp.getSet());
+		}) + ",");
 
 		/**
 		 * STEP2: Compute fi
@@ -47,7 +49,7 @@ public class Scheme1timed {
 		List<BigInteger> fi = new ArrayList<BigInteger>();
 
 		System.out.print(Utils.measure(() -> fi.addAll(Scheme1KeygenSteps
-				.step2(piqi))) + ",");
+				.step2(pqlist.getList()))) + ",");
 
 		// System.out.print("(fi=" + Arrays.toString(fi.toArray()) + ")");
 
@@ -61,9 +63,8 @@ public class Scheme1timed {
 		/**
 		 * STEP4: Compute d
 		 */
-		System.out
-				.print(Utils.measure(() -> setD(Scheme1KeygenSteps.step4(N1)))
-						+ ",");
+		System.out.print(Utils.measure(() -> setD(Scheme1KeygenSteps
+				.step4_optimized(pqlist.getSet()))) + ",");
 
 		/**
 		 * STEP5: Pick k
@@ -77,9 +78,9 @@ public class Scheme1timed {
 		System.out.print(Utils.measure(() -> setN(Scheme1KeygenSteps.step6(
 				kfiPair.getK(), fi))));
 
-		System.out.print("," + N1+",");
-		
-		System.out.print(Arrays.toString(piqi.toArray()));
+		System.out.print("," + N1 + ",");
+
+		// System.out.print(Arrays.toString(pqlist.getList().toArray()));
 
 		/**
 		 * STEP7: Finalize keys (public is already finalized)

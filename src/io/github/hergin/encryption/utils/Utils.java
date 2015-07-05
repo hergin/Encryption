@@ -77,10 +77,10 @@ public class Utils {
 	 * are distinct primes
 	 * 
 	 * @param r
-	 * @return a list of <pi,qi> size r
+	 * @return a list of <pi,qi> size r and a set of distinct pq pairs
 	 */
-	public static List<PrimePair> get2RprimeNumbers(int r) {
-		List<PrimePair> result = new ArrayList<PrimePair>();
+	public static PrimePairList get2RprimeNumbers(int r) {
+		PrimePairList pplist = new PrimePairList();
 
 		for (int i = 1; i <= r; i++) {
 			BigInteger p = Utils.getProbablePrime(Constants.BIT_LENGTH);
@@ -88,10 +88,12 @@ public class Utils {
 			do {
 				q = Utils.getProbablePrime(Constants.BIT_LENGTH);
 			} while (p.compareTo(q) == 0);
-			result.add(new PrimePair(p, q));
+			pplist.getList().add(new PrimePair(p, q));
+			pplist.getSet().add(q);
+			pplist.getSet().add(p);
 		}
 
-		return result;
+		return pplist;
 	}
 
 }

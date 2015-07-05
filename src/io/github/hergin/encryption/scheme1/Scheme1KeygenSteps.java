@@ -2,11 +2,13 @@ package io.github.hergin.encryption.scheme1;
 
 import io.github.hergin.encryption.utils.Constants;
 import io.github.hergin.encryption.utils.PrimePair;
+import io.github.hergin.encryption.utils.PrimePairList;
 import io.github.hergin.encryption.utils.Utils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -20,9 +22,9 @@ public class Scheme1KeygenSteps {
 	 * pi and qi are distinct primes.
 	 * 
 	 * @param r
-	 * @return [<p1,q1>,<p2,q2>,...,<pr,qr>]
+	 * @return [<p1,q1>,<p2,q2>,...,<pr,qr>] + set of distinct pqs
 	 */
-	public static List<PrimePair> step1(int r) {
+	public static PrimePairList step1(int r) {
 		return Utils.get2RprimeNumbers(r);
 	}
 
@@ -54,15 +56,13 @@ public class Scheme1KeygenSteps {
 	}
 
 	/**
-	 * (4) Compute d = EulerPhi(N1) function.
-	 * http://professorjava.weebly.com/totient.html works correctly. _______
-	 * TODO definitely we should look for an optimized solution other than a
-	 * brute force, check @Scheme1KeygenStepsTest unit tests for timing
+	 * (4) Compute d = EulerPhi(N1) function. NAIVE APPROACH
+	 * http://professorjava.weebly.com/totient.html works correctly.
 	 * 
 	 * @param N1
 	 * @return EulerPhi(N1)
 	 */
-	public static BigInteger step4(BigInteger N1) {
+	public static BigInteger step4_naive(BigInteger N1) {
 		BigInteger count = BigInteger.ZERO;
 		BigInteger a;
 		for (a = new BigInteger("1"); a.compareTo(N1) < 0; a = a
@@ -72,6 +72,25 @@ public class Scheme1KeygenSteps {
 			}
 		}
 		return count;
+	}
+
+	/**
+	 * Compute phi(N1) using the distinct primes in pq pairs So if
+	 * distinctPrimes in pq pairs are <a,b,c,d,e>, phi(N1) =
+	 * (a-1)*(b-1)*(c-1)*(d-1)*(e-1)
+	 *
+	 * @param distinctPrimes
+	 *            of N1, which are distinct primes in pq pairs
+	 * @return phi(N1)
+	 */
+	public static BigInteger step4_optimized(Set<BigInteger> distinctPrimes) {
+		BigInteger phi = BigInteger.ONE;
+
+		for (BigInteger prime : distinctPrimes) {
+			phi = phi.multiply(prime.subtract(BigInteger.ONE));
+		}
+
+		return phi;
 	}
 
 	/**

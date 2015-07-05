@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import io.github.hergin.encryption.scheme1.Scheme1KeygenSteps;
 import io.github.hergin.encryption.utils.PrimePair;
+import io.github.hergin.encryption.utils.PrimePairList;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import org.junit.Test;
@@ -17,8 +20,8 @@ public class Scheme1KeygenStepsTest {
 	@Test
 	public void testStep1() {
 		int r = 5;
-		List<PrimePair> result = Scheme1KeygenSteps.step1(r);
-		result.stream().forEach(new Consumer<PrimePair>() {
+		PrimePairList pplist = Scheme1KeygenSteps.step1(r);
+		pplist.getList().stream().forEach(new Consumer<PrimePair>() {
 
 			@Override
 			public void accept(PrimePair t) {
@@ -27,7 +30,7 @@ public class Scheme1KeygenStepsTest {
 			}
 
 		});
-		assertEquals(result.size(), r, 0);
+		assertEquals(pplist.getList().size(), r, 0);
 	}
 
 	@Test
@@ -72,39 +75,48 @@ public class Scheme1KeygenStepsTest {
 
 	@Test
 	public void testStep4() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("210")),
-				new BigInteger("48"));
+		Set<BigInteger> set = new HashSet<>();
+		set.add(new BigInteger("2"));
+		set.add(new BigInteger("3"));
+		set.add(new BigInteger("5"));
+		set.add(new BigInteger("7"));
+		assertEquals(new BigInteger("48"),
+				Scheme1KeygenSteps.step4_optimized(set));
 	}
 
 	@Test
-	public void testStep4_2() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("500")),
+	public void testStep4_naive() {
+		assertEquals(Scheme1KeygenSteps.step4_naive(new BigInteger("500")),
 				new BigInteger("200"));
 	}
 
 	@Test
-	public void testStep4_3() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("10000")),
+	public void testStep4_naive2() {
+		assertEquals(Scheme1KeygenSteps.step4_naive(new BigInteger("10000")),
 				new BigInteger("4000"));
 	}
 
 	@Test
-	public void testStep4_4() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("12421232")),
+	public void testStep4_naive3() {
+		assertEquals(
+				Scheme1KeygenSteps.step4_naive(new BigInteger("12421232")),
 				new BigInteger("6210608"));
 	}
 
-	@Test
-	public void testStep4_5() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("124212321")),
-				new BigInteger("82750464"));
-	}
-
-	@Test
-	public void testStep4_6() {
-		assertEquals(Scheme1KeygenSteps.step4(new BigInteger("394516319693")),
-				new BigInteger("367250526720"));
-	}
+	// The following tests are infeasible with naive approach
+	//
+	// @Test
+	// public void testStep4_naive4() {
+	// assertEquals(Scheme1KeygenSteps.step4_naive(new BigInteger("124212321")),
+	// new BigInteger("82750464"));
+	// }
+	//
+	// @Test
+	// public void testStep4_naive5() {
+	// assertEquals(Scheme1KeygenSteps.step4_naive(new
+	// BigInteger("394516319693")),
+	// new BigInteger("367250526720"));
+	// }
 
 	@Test
 	public void testStep5() {

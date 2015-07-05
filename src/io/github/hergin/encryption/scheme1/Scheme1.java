@@ -1,7 +1,7 @@
 package io.github.hergin.encryption.scheme1;
 
 import io.github.hergin.encryption.utils.PlainTextOutOfScopeException;
-import io.github.hergin.encryption.utils.PrimePair;
+import io.github.hergin.encryption.utils.PrimePairList;
 import io.github.hergin.encryption.utils.SecretKey;
 
 import java.math.BigInteger;
@@ -31,14 +31,14 @@ public class Scheme1 {
 	public Scheme1 keygen() {
 
 		/**
-		 * STEP1: Compute <pi,qi> pairs
+		 * STEP1: Compute <pi,qi> pairs + set
 		 */
-		List<PrimePair> piqi = Scheme1KeygenSteps.step1(r);
+		PrimePairList pqlist = Scheme1KeygenSteps.step1(r);
 
 		/**
 		 * STEP2: Compute fi
 		 */
-		List<BigInteger> fi = Scheme1KeygenSteps.step2(piqi);
+		List<BigInteger> fi = Scheme1KeygenSteps.step2(pqlist.getList());
 
 		/**
 		 * STEP3: Compute N1
@@ -48,7 +48,8 @@ public class Scheme1 {
 		/**
 		 * STEP4: Compute d
 		 */
-		d = Scheme1KeygenSteps.step4(N1);
+		// d = Scheme1KeygenSteps.step4(N1);
+		d = Scheme1KeygenSteps.step4_optimized(pqlist.getSet());
 
 		/**
 		 * STEP5: Pick k
