@@ -58,8 +58,10 @@ public class Scheme1timed {
 		System.out.print(Utils.measure(new Function() {
 			@Override
 			public void doIt() {
+				List<BigInteger> list = Scheme1KeygenSteps.step2(pqlist
+						.getList());
 				if (fi.isEmpty())
-					fi.addAll(Scheme1KeygenSteps.step2(pqlist.getList()));
+					fi.addAll(list);
 			}
 		}) + ",");
 
@@ -94,7 +96,7 @@ public class Scheme1timed {
 		if (r < 18 && false)
 			System.out.print("PQlist="
 					+ Arrays.toString(pqlist.getList().toArray()) + ",N1=" + N1
-					+ ",d=" + d);
+					+ ",d=" + d + ",");
 
 		// System.out.print(Arrays.toString(pqlist.getList().toArray()));
 
@@ -147,8 +149,8 @@ public class Scheme1timed {
 		/**
 		 * STEP2: Compute M
 		 */
-		System.out.print(Utils.measure(() -> setM(Scheme1DecryptionSteps
-				.step2(C, l, N1))));
+		System.out.print(Utils.measure(() -> setM(Scheme1DecryptionSteps.step2(
+				C, l, N1))));
 
 		return M;
 	}
