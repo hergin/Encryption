@@ -1,25 +1,31 @@
 package io.github.hergin.encryption;
 
+import java.math.BigInteger;
+
 import io.github.hergin.encryption.scheme1.Scheme1timed;
+import io.github.hergin.encryption.utils.PlainTextOutOfScopeException;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		int[] rs = new int[] { 1, 5, 10, 25, 50, 100, 250, 500, 1000, 2000,
-				5000, 10000 };
-
-		// System.out.println("r,time");
-		// for (int r : rs) {
-		// Scheme1 scheme1 = new Scheme1(r);
-		// System.out.println(r + "," + Utils.measure(() -> scheme1.keygen()));
-		// }
-
-		System.out.println("Keygen Steps");
-		System.out.println("r,1,2,3,4,5,6,N1,pq");
-		for (int r : rs) {
+		System.out
+				.println(",Keygen Steps,,,,,,Encrypt Steps,Decrypt Steps,,Result");
+		System.out.println("r,1,2,3,4,5,6,4,1,2");
+		for (int i = 0; i < 10; i++) {
+			int r = (int) Math.pow(2, i);
 			System.out.print(r + ",");
-			new Scheme1timed(r).keygen();
+			Scheme1timed scheme1 = new Scheme1timed(r).keygen();
+			BigInteger M = new BigInteger("100");
+			BigInteger C = null;
+			try {
+				C = scheme1.encrypt(M);
+			} catch (PlainTextOutOfScopeException e) {
+				System.err.print("EXP");
+			}
+			BigInteger newM = scheme1.decrypt(C);
+			if (M.equals(newM))
+				System.out.print(",OK");
 			System.out.println("");
 		}
 

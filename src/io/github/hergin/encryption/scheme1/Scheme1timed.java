@@ -1,5 +1,6 @@
 package io.github.hergin.encryption.scheme1;
 
+import io.github.hergin.encryption.utils.Function;
 import io.github.hergin.encryption.utils.PlainTextOutOfScopeException;
 import io.github.hergin.encryption.utils.PrimePairList;
 import io.github.hergin.encryption.utils.SecretKey;
@@ -7,6 +8,7 @@ import io.github.hergin.encryption.utils.Utils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Scheme1timed {
@@ -23,6 +25,9 @@ public class Scheme1timed {
 
 	BigInteger N1;
 	BigInteger d;
+	BigInteger C;
+	BigInteger M;
+	BigInteger l;
 	int r;
 
 	public Scheme1timed(int r) {
@@ -39,8 +44,10 @@ public class Scheme1timed {
 
 		System.out.print(Utils.measure(() -> {
 			PrimePairList temp = Scheme1KeygenSteps.step1(r);
-			pqlist.getList().addAll(temp.getList());
-			pqlist.getSet().addAll(temp.getSet());
+			if (pqlist.getList().isEmpty()) {
+				pqlist.getList().addAll(temp.getList());
+				pqlist.getSet().addAll(temp.getSet());
+			}
 		}) + ",");
 
 		/**
@@ -48,8 +55,13 @@ public class Scheme1timed {
 		 */
 		List<BigInteger> fi = new ArrayList<BigInteger>();
 
-		System.out.print(Utils.measure(() -> fi.addAll(Scheme1KeygenSteps
-				.step2(pqlist.getList()))) + ",");
+		System.out.print(Utils.measure(new Function() {
+			@Override
+			public void doIt() {
+				if (fi.isEmpty())
+					fi.addAll(Scheme1KeygenSteps.step2(pqlist.getList()));
+			}
+		}) + ",");
 
 		// System.out.print("(fi=" + Arrays.toString(fi.toArray()) + ")");
 
@@ -76,9 +88,13 @@ public class Scheme1timed {
 		 * STEP6: Compute N
 		 */
 		System.out.print(Utils.measure(() -> setN(Scheme1KeygenSteps.step6(
-				kfiPair.getK(), fi))));
+				kfiPair.getK(), fi))) + ",");
 
-		System.out.print("," + N1 + ",");
+		// System.out.print("," + N1 + ",");
+		if (r < 18 && false)
+			System.out.print("PQlist="
+					+ Arrays.toString(pqlist.getList().toArray()) + ",N1=" + N1
+					+ ",d=" + d);
 
 		// System.out.print(Arrays.toString(pqlist.getList().toArray()));
 
@@ -110,8 +126,8 @@ public class Scheme1timed {
 		/**
 		 * STEP4: Compute cipher text
 		 */
-		BigInteger C = Scheme1EncryptionSteps.step4(M, getSecretKey().getK(),
-				N1);
+		System.out.print(Utils.measure(() -> setC(Scheme1EncryptionSteps.step4(
+				M, getSecretKey().getK(), N1))) + ",");
 
 		/**
 		 * STEP5: Cipher text is ready
@@ -125,12 +141,14 @@ public class Scheme1timed {
 		/**
 		 * STEP1: Compute l
 		 */
-		BigInteger l = Scheme1DecryptionSteps.step1(getSecretKey().getK(), d);
+		System.out.print(Utils.measure(() -> setL(Scheme1DecryptionSteps.step1(
+				getSecretKey().getK(), d))) + ",");
 
 		/**
 		 * STEP2: Compute M
 		 */
-		BigInteger M = Scheme1DecryptionSteps.step2(C, l, N1);
+		System.out.print(Utils.measure(() -> setM(Scheme1DecryptionSteps
+				.step2(C, l, N1))));
 
 		return M;
 	}
@@ -181,6 +199,30 @@ public class Scheme1timed {
 
 	public void setR(int r) {
 		this.r = r;
+	}
+
+	public void setC(BigInteger c) {
+		C = c;
+	}
+
+	public void setM(BigInteger m) {
+		M = m;
+	}
+
+	public BigInteger getC() {
+		return C;
+	}
+
+	public BigInteger getM() {
+		return M;
+	}
+
+	public BigInteger getL() {
+		return l;
+	}
+
+	public void setL(BigInteger l) {
+		this.l = l;
 	}
 
 }
