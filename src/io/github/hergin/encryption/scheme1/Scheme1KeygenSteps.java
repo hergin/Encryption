@@ -29,7 +29,7 @@ public class Scheme1KeygenSteps {
 	}
 
 	/**
-	 * (2) Compute fi = pi * qi, for 1 <= i <= r.
+	 * (2) Compute fi = pi * qi, for 1 <= i <= r.
 	 * 
 	 * @param pq
 	 *            pairs
@@ -56,7 +56,7 @@ public class Scheme1KeygenSteps {
 	}
 
 	/**
-	 * (4) Compute d = EulerPhi(N1) function. NAIVE APPROACH
+	 * (4) Compute d = EulerPhi(N1) function. NAIVE APPROACH
 	 * http://professorjava.weebly.com/totient.html works correctly.
 	 * 
 	 * @param N1
