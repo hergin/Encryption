@@ -93,7 +93,7 @@ public class Scheme1timed {
 				kfiPair.getK(), fi))) + ",");
 
 		// System.out.print("," + N1 + ",");
-		if (r < 18 && false)
+		if (r < 3 && false)
 			System.out.print("PQlist="
 					+ Arrays.toString(pqlist.getList().toArray()) + ",N1=" + N1
 					+ ",d=" + d + ",");
@@ -115,24 +115,20 @@ public class Scheme1timed {
 		 */
 
 		/**
-		 * STEP2: Compute N1 (already computed in keygen step3)
+		 * STEP2: Determine if M is element of ZN1
 		 */
-
-		/**
-		 * STEP3: Determine if M is element of ZN1
-		 */
-		if (!Scheme1EncryptionSteps.step3(M, N1)) {
+		if (!Scheme1EncryptionSteps.step2(M, N1)) {
 			throw new PlainTextOutOfScopeException(M, N1);
 		}
 
 		/**
-		 * STEP4: Compute cipher text
+		 * STEP3: Compute cipher text
 		 */
-		System.out.print(Utils.measure(() -> setC(Scheme1EncryptionSteps.step4(
+		System.out.print(Utils.measure(() -> setC(Scheme1EncryptionSteps.step3(
 				M, getSecretKey().getK(), N1))) + ",");
 
 		/**
-		 * STEP5: Cipher text is ready
+		 * STEP4: Cipher text is ready
 		 */
 		return C;
 

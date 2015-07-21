@@ -13,20 +13,6 @@ import java.util.List;
 public class Scheme1EncryptionSteps {
 
 	/**
-	 * Compute N1 = lcm(f1,...,fr).
-	 * 
-	 * @param fi
-	 * @return N1
-	 */
-	public static BigInteger step2(List<BigInteger> fi) {
-		BigInteger N1 = BigInteger.ONE;
-
-		N1 = Utils.lcm(fi);
-
-		return N1;
-	}
-
-	/**
 	 * Determine your plaintext M is an element of ZN1 (basically M should be
 	 * less than N1)
 	 * 
@@ -35,7 +21,7 @@ public class Scheme1EncryptionSteps {
 	 * @param N1
 	 * @return true if M is an element of ZN1
 	 */
-	public static boolean step3(BigInteger M, BigInteger N1) {
+	public static boolean step2(BigInteger M, BigInteger N1) {
 		if (M.compareTo(N1) == -1) {
 			return true;
 		}
@@ -52,7 +38,7 @@ public class Scheme1EncryptionSteps {
 	 * @param N
 	 * @return C
 	 */
-	public static BigInteger step4(BigInteger M, BigInteger k, BigInteger N) {
+	public static BigInteger step3(BigInteger M, BigInteger k, BigInteger N) {
 		BigInteger C = BigInteger.ONE;
 
 		C = M.modPow(k, N);
