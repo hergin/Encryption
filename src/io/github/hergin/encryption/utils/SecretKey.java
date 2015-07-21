@@ -9,36 +9,30 @@ public class SecretKey {
 
 	BigInteger k;
 
-	List<BigInteger> fi;
+	BigInteger N1;
 
 	public SecretKey() {
-		fi = new ArrayList<BigInteger>();
+
 	}
 
-	public SecretKey(BigInteger k, List<BigInteger> fi) {
+	public SecretKey(BigInteger k, BigInteger N1) {
 		this.k = k;
-		this.fi = fi;
+		this.N1 = N1;
 	}
 
 	public BigInteger getK() {
 		return k;
 	}
 
-	public List<BigInteger> getFi() {
-		return fi;
+	public BigInteger getN1() {
+		return N1;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SECRET_KEY( k=" + k.toString() + ", fi=[");
-		for (Iterator<BigInteger> iterator = fi.iterator(); iterator.hasNext();) {
-			BigInteger f = (BigInteger) iterator.next();
-			sb.append(f.toString());
-			if (iterator.hasNext())
-				sb.append(",");
-		}
-		sb.append("] )");
+		sb.append("SECRET_KEY( k=" + k.toString() + ", N1=[" + N1.toString()
+				+ "]");
 		return sb.toString();
 	}
 
@@ -46,8 +40,8 @@ public class SecretKey {
 		this.k = k;
 	}
 
-	public void setFi(List<BigInteger> fi) {
-		this.fi = fi;
+	public void setN1(BigInteger N1) {
+		this.N1 = N1;
 	}
 
 }

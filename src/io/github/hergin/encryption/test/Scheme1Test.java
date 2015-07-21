@@ -23,7 +23,7 @@ public class Scheme1Test {
 	@Test
 	public void testKeygen() {
 		assertNotNull(scheme1.getPublicKey());
-		assertNotNull(scheme1.getSecretKey().getFi());
+		assertNotNull(scheme1.getSecretKey().getN1());
 		assertNotNull(scheme1.getSecretKey().getK());
 	}
 

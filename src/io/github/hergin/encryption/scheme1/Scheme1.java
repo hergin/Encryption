@@ -64,7 +64,7 @@ public class Scheme1 {
 		/**
 		 * STEP7: Finalize keys (public is already finalized)
 		 */
-		kfiPair.setFi(fi);
+		kfiPair.setN1(N1);
 
 		return this;
 	}
